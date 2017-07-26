@@ -24,6 +24,12 @@
 //   ]
 // }
 HTTP.methods({
+  'test': function(data) {
+    console.log(data);
+    return {
+      status: 'success'
+    }
+  },
   'searchPost': function(data) {
     var jsonData = JSON.parse(data);
     var posts = postDB.find({
