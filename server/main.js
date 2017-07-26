@@ -9,6 +9,17 @@ if (user === undefined) {
 }
 
 
+
+
+/*
+아 나도 일하고 있음.
+
+노는거 아니고
+
+
+여러가지 코드를 건드립니다.
+
+ */
 // var b = Object.getOwnPropertyNames( {a:true, b:false, c:[1,2,3], spoke:{a:true}} )
 // console.log(b);
 
