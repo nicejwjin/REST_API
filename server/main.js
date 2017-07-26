@@ -9,6 +9,18 @@ if (user === undefined) {
 }
 
 
+
+/*
+자 수정을 시작합니다..
+어쩌고 저쩌고
+여러 가지 파일을 건드리면서 수정을 하겠죠.
+
+
+
+
+여기만 수정을 할게요..
+ */
+
 // var b = Object.getOwnPropertyNames( {a:true, b:false, c:[1,2,3], spoke:{a:true}} )
 // console.log(b);
 
