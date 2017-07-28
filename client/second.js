@@ -11,7 +11,7 @@ Template.second.helpers({
 });
 
 Template.second.events({
-  'click #btnEdit': function(evt, tmpl) {
+  'click [id=btnEdit]': function(evt, tmpl) {
     boardDB.update({_id: tmp_id},
       {
         $set: {
@@ -37,7 +37,8 @@ Template.second.events({
     boardDB.insert({
       createdAt: new Date(),
       title: strTitle,
-      body: strBody
+      body: strBody,
+      isChecked: $('#'+this._id+':checked').val()
     });
 
     $('#inpTitle').val('');

@@ -10,6 +10,13 @@
   <table class="table table-striped">
     {{#each boards}}
       <tr id="trRow">
+        <td>
+          <div class="checkbox">
+            <label>
+              <input class="inpCheck" id="{{_id}}" type="checkbox">
+            </label>
+          </div>
+        </td>
         <td>{{title}}</td>
         <td>{{body}}</td>
         <td><button id="btnRemove">X</button></td>
