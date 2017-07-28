@@ -1,14 +1,20 @@
 <template name="second">
-  this is second.html<br>
-  this is second.html<br>
-  this is second.html<br>
-  this is second.html<br>
-  this is second.html<br>this is second.html<br>this is second.html<br>
 
-  this is second.html<br>
-  this is second.html<br>
-  this is second.html<br>
-  this is second.html<br>
+  <div>제목<input id="inpTitle" type="text" name="text" placeholder="제목을 입력해 주세요"/></div>
+  <div>본문<input id="inpBody" type="text" name="text" placeholder="본문을 입력해 주세요"/></div>
+  <div>
+    <button id="btnWrite">Write</button>
+    <button id="btnEdit">Edit</button>
+  </div>
 
+  <table class="table table-striped">
+    {{#each boards}}
+      <tr id="trRow">
+        <td>{{title}}</td>
+        <td>{{body}}</td>
+        <td><button id="btnRemove">X</button></td>
+      </tr>
+    {{/each}}
+  </table>
 
 </template>

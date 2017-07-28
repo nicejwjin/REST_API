@@ -27,7 +27,14 @@ HTTP.methods({
   'test': function(data) {
     console.log(data);
     return {
-      status: 'success'
+      status: 'success',
+      data: ['one', 'two'],
+      data2: {'one2': 'two2'},
+      data3: [
+        {
+          'one3': 'two3'
+        }
+      ]
     }
   },
   'searchPost': function(data) {

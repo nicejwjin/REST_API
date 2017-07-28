@@ -1,4 +1,14 @@
 <template name="first">
+
+    <table>
+      {{#each array}}
+      <tr>
+        <td>{{userName}}</td>
+        <td style="color:{{ageColor}}">{{age}}</td>
+        <td>{{address}}</td>
+      </tr>
+      {{/each}}
+    </table>
   This is first.html file. <br>
   This is first.html file. <br>
   This is first.html file. <br>
