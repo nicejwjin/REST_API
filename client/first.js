@@ -4,6 +4,12 @@ Template.first.onCreated(function() {
 
 Template.first.onRendered(function() {
   // alert("onRendered runs!")
+  setInterval(function() {
+    $('#inpDateTime').val((new Date()).toISOString().substring(0, 19));
+  }, 1000);
+
+  // $('#inpDateTime').val((new Date()).toISOString().substring(0, 19));
+
 });
 
 Template.first.helpers({
@@ -54,5 +60,13 @@ Template.first.helpers({
 });
 
 Template.first.events({
-
+  'click #targetButton': function(evt, tmpl) {
+    $('#inpDateTime').trigger('click');
+  },
+  'change #inpDateTime': function(evt, tmpl) {
+    // meteor add momentjs:moment
+    var _date = new Date($('#inpDateTime').val());
+    var str_date = moment(_date).format('YYYY-MM-DD');
+    $('#targetButton').text(str_date);
+  }
 });

@@ -24,11 +24,45 @@
 //   ]
 // }
 HTTP.methods({
+  'userLogin': function(data) {
+    var user = userDB.findOne({userId: data.ID});
+    console.log(user);
+    if (user == undefined) {
+      return {
+        status: '없는 회원입니다.'
+      }
+    }
+    else {
+      if(user.password === data.PW) {
+        return {
+          status: 'success',
+          user: user
+        }
+      }
+      else {
+        return {
+          status: '비밀번호가 틀렸슴.'
+        }
+      }
+
+    }
+  },
+  'userAdd': function(data) {
+    userDB.insert({
+      createdAt: new Date(),
+      userId: data.ID,
+      password: data.PW
+    });
+
+    return {
+      status: 'success'
+    }
+  },
   'test': function(data) {
     console.log(data);
     return {
       status: 'success',
-      data: ['one', 'two'],
+      data: ['one', 'two', 'threew'],
       data2: {'one2': 'two2'},
       data3: [
         {
