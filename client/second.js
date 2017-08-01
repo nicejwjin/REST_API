@@ -5,6 +5,9 @@ Template.second.onCreated(function() {
 });
 
 Template.second.helpers({
+  ageVaue: function() {
+    return Session.get('age').age;
+  },
   boards: function() {
     return boardDB.find({}, {sort: {createdAt: -1}}).fetch();
   }

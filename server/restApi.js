@@ -24,6 +24,69 @@
 //   ]
 // }
 HTTP.methods({
+  //오늘뭐먹지
+  'addOrderList': function(data) {
+    console.log(data);
+    //data 안에 ID가 들어 있을 것임. / orderList 라는 어레이도 들어 있을 것임.
+
+    orderDB.insert({
+      orderUserId: data.userId,
+      orderList: data.orderList
+    });
+
+    return {
+      status: 'success'
+    }
+  },
+
+  //분실물
+  'getPegyList': function(data) {
+    var today = new Date();
+    today.setDate(today.getDate() - 30);
+    var startTime = today.setHours(0,0,0,0);
+    var endTime = today.setHours(23,59,59,999);
+    var lostList = lostDB.find({isLost: false,
+      createdAt: {$gte: startTime, $lt: endTime}}).fetch();
+    return lostList;
+  },
+  'getIGotItListToday': function(data) {
+    //있어요 리스트
+
+    var startTime = (new Date()).setHours(0,0,0,0);
+    var endTime = (new Date()).setHours(23,59,59,999);
+    var lostList = lostDB.find({isLost: false,
+      createdAt: {$gte: startTime, $lt: endTime}}).fetch();
+    return lostList;
+  },
+  'getFinderListToday': function(data) {
+    //찾아요 리스트
+    var startTime = (new Date()).setHours(0,0,0,0);
+    var endTime = (new Date()).setHours(23,59,59,999);
+    var lostList = lostDB.find({isLost: true,
+      createdAt: {$gte: startTime, $lt: endTime}}).fetch();
+    return lostList;
+  },
+  'getIGotItList': function(data) {
+    //있어요 리스트
+    var lostList = lostDB.find({isLost: false}).fetch();
+    return lostList;
+  },
+  'getFinderList': function(data) {
+    //찾아요 리스트
+    var lostList = lostDB.find({isLost: true}).fetch();
+    return lostList;
+  },
+  'addLostDB': function(data) {
+    /*
+    data 안에는 분실 내용 / 시간 / 장소 등의 내용이 들어 있을 것임.
+     */
+    data.createdAt = new Date();
+    lostDB.insert(data);
+
+    return {
+      status: 'success'
+    }
+  },
   'userLogin': function(data) {
     var user = userDB.findOne({userId: data.ID});
     console.log(user);
@@ -48,11 +111,19 @@ HTTP.methods({
     }
   },
   'userAdd': function(data) {
-    userDB.insert({
-      createdAt: new Date(),
-      userId: data.ID,
-      password: data.PW
-    });
+    var user = userDB.findOne({userId: data.ID});
+    if (user === undefined) {
+      userDB.insert({
+        createdAt: new Date(),
+        userId: data.ID,
+        password: data.PW
+      });
+    }
+    else {
+      return {
+        status: '해당 ID가 있습니다.'
+      }
+    }
 
     return {
       status: 'success'

@@ -13,6 +13,16 @@ Template.first.onRendered(function() {
 });
 
 Template.first.helpers({
+  percentage: function() {
+    var curProjectTodosCount = todoDB.find({project_id: 'AAA'}).count();
+    var curProjectTodosCompletedCount = todoDB.find({project_id: 'AAA', isCompleted: true}).count();
+    console.log(curProjectTodosCount);
+    console.log(curProjectTodosCompletedCount);
+    if (curProjectTodosCount === 0) {
+      return 0;
+    }
+    return (curProjectTodosCompletedCount / curProjectTodosCount) * 100;
+  },
   ageColor: function() {
     if (this.age > 20) {
       return 'red'
@@ -30,17 +40,17 @@ Template.first.helpers({
       },
       {
         userName: 'jungwon jin',
-        age: 30,
+        age: 31,
         address: 'Seoul'
       },
       {
         userName: 'jungwon jin',
-        age: 30,
+        age: 32,
         address: 'Seoul'
       },
       {
         userName: 'jungwon jin',
-        age: 30,
+        age: 33,
         address: 'Seoul'
       }
 
@@ -60,6 +70,9 @@ Template.first.helpers({
 });
 
 Template.first.events({
+  'click [name=lnkSecond]': function(evt, tmpl) {
+    Session.set('age', this);
+  },
   'click #targetButton': function(evt, tmpl) {
     $('#inpDateTime').trigger('click');
   },
